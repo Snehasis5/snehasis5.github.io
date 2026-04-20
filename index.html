@@ -3,224 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snehasis Mukhopadhyay — AI Safety & Machine Learning</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    
+    <title>Snehasis Mukhopadhyay — AI Safety Research</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ink: #111111;
-            --ink-dim: #444444;
-            --ink-ghost: #888888;
-            --paper: #fcfbf9;
-            --paper-mute: #f3f1ec;
-            --accent: #839671; /* Sage / Research Green */
-            --rule: #e5e2da;
+            --ink: #1a1510;
+            --ink-2: #3d3228;
+            --ink-3: #6b5c4e;
+            --ink-4: #9a8878;
+            --paper: #f7f3ec;
+            --paper-2: #efe9df;
+            --paper-3: #e5ddd0;
+            --rule: #d6ccc0;
             --gold: #b08d57;
-            --sans: 'Inter', sans-serif;
-            --mono: 'Space Mono', monospace;
-            --serif: 'EB Garamond', serif;
+            --gold-light: #c9a96e;
+            --gold-dark: #8c6d3f;
+            --red: #a63228;
+            --green: #2d6a4f;
+            --amber: #b87333;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { 
-            font-family: var(--sans); 
-            background: var(--paper); 
-            color: var(--ink); 
-            line-height: 1.6; 
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container { max-width: 900px; margin: 0 auto; padding: 0 30px; }
+        body { font-family: 'EB Garamond', Georgia, serif; background: var(--paper); color: var(--ink); font-size: 18px; line-height: 1.7; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; inset: 0; background-image: repeating-linear-gradient(to bottom, transparent, transparent 27px, rgba(180,165,145,0.12) 27px, rgba(180,165,145,0.12) 28px); pointer-events: none; z-index: 0; }
+        .page { max-width: 860px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
+        #progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold-dark); width: 0%; z-index: 999; transition: width 0.1s linear; }
+        header { padding: 80px 0 60px; border-bottom: 2px solid var(--ink); }
+        .masthead-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; }
+        .masthead-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); line-height: 1.8; }
+        .masthead-label .highlight { color: var(--gold-dark); }
+        .profile-block { display: flex; align-items: flex-start; gap: 48px; }
+        .profile-text { flex: 1; }
+        .name { font-family: 'Fraunces', serif; font-size: 4.2rem; font-weight: 300; line-height: 1.0; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 6px; }
+        .name em { font-style: italic; color: var(--ink-2); }
+        .title-line { font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+        .title-line::after { content: ''; flex: 1; height: 1px; background: var(--gold-dark); opacity: 0.4; }
+        .bio-summary { font-family: 'Fraunces', serif; font-size: 1.22rem; font-weight: 400; color: var(--ink); line-height: 1.75; margin-bottom: 20px; max-width: 580px; }
+        .bio-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .bio-tag { font-family: 'DM Mono', monospace; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border: 1px solid var(--rule); color: var(--ink-3); background: var(--paper-2); cursor: default; transition: background 0.2s; }
+        .bio-tag:hover { background: var(--gold-dark); color: var(--paper); border-color: var(--gold-dark); }
+        .bio-body { font-size: 1.02rem; color: var(--ink-2); line-height: 1.9; max-width: 580px; margin-bottom: 32px; }
+        .profile-photo { width: 155px; height: 195px; flex-shrink: 0; border: 1px solid var(--rule); overflow: hidden; background: var(--paper-3); }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; display: block; /* Removed Grayscale Filter */ }
+        .contact-row { display: flex; gap: 28px; flex-wrap: wrap; }
+        .contact-link { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; }
+        nav { padding: 18px 0; border-bottom: 1px solid var(--rule); display: flex; gap: 36px; position: sticky; top: 0; background: var(--paper); z-index: 100; }
+        .nav-link { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); text-decoration: none; border-bottom: 1px solid transparent; }
+        .section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+        .section-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 48px; }
+        .section-title { font-family: 'Fraunces', serif; font-size: 1.9rem; font-weight: 400; color: var(--ink); }
+        .section-rule { flex: 1; height: 1px; background: var(--rule); }
+        .paper { margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px dashed var(--rule); }
+        .paper-title { font-family: 'Fraunces', serif; font-size: 1.55rem; font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 10px; }
+        .paper-abstract { font-size: 1.02rem; color: var(--ink-2); line-height: 1.82; margin-bottom: 24px; }
+        .paper-details { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.55s ease, opacity 0.4s ease; }
+        .paper-details.open { max-height: 2000px; opacity: 1; }
+        .figure { margin: 28px 0; background: var(--paper-2); border: 1px solid var(--rule); padding: 20px; }
+        .figure img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); }
+        .figure-caption { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--ink-3); margin-top: 10px; }
+        .results-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.88rem; }
+        .results-table th { font-family: 'DM Mono', monospace; font-size: 0.68rem; border-bottom: 2px solid var(--ink); padding: 10px 14px; text-align: left; }
+        .results-table td { padding: 11px 14px; border-bottom: 1px solid var(--rule); color: var(--ink-2); }
+        .bar { height: 8px; background: var(--gold); opacity: 0.7; }
         
-        /* Progress Bar */
-        #progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0%; z-index: 1000; transition: width 0.1s; }
-
-        /* Header & Masthead */
-        header { padding: 80px 0 40px; border-bottom: 2px solid var(--ink); }
-        .masthead { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
-        .masthead-label { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-ghost); }
+        .regime-tabs { display: flex; border: 1px solid var(--rule); margin-top: 24px; }
+        .regime-tab { flex: 1; padding: 12px; font-family: 'DM Mono', monospace; font-size: 0.69rem; background: var(--paper-2); border: none; border-right: 1px solid var(--rule); cursor: pointer; }
+        .regime-tab.active { background: var(--ink); color: var(--paper); }
+        .regime-panel { display: none; padding: 24px; background: var(--paper-2); border: 1px solid var(--rule); border-top: none; }
+        .regime-panel.active { display: block; }
         
-        .hero { display: flex; gap: 50px; align-items: flex-start; }
-        .hero-content { flex: 1; }
-        .name { font-size: 4rem; font-weight: 600; line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 15px; }
-        .name em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink-dim); }
-        
-        .tagline { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 500; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
-        .tagline::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+        .heatmap-box { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 15px; }
+        .hm-tile { aspect-ratio: 1; border: 1px solid rgba(0,0,0,0.05); }
 
-        .bio-summary { font-size: 1.25rem; color: var(--ink-dim); margin-bottom: 30px; max-width: 600px; line-height: 1.5; }
-        
-        .profile-photo { width: 160px; height: 210px; border-radius: 2px; overflow: hidden; background: var(--paper-mute); border: 1px solid var(--rule); flex-shrink: 0; }
-        .profile-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
-
-        .nav-sticky { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); padding: 15px 0; z-index: 100; display: flex; gap: 30px; }
-        .nav-link { font-family: var(--mono); font-size: 0.75rem; text-decoration: none; color: var(--ink-ghost); text-transform: uppercase; font-weight: 500; }
-        .nav-link:hover, .nav-link.active { color: var(--ink); }
-
-        /* Sections */
-        .section { padding: 80px 0; border-bottom: 1px solid var(--rule); }
-        .section-header { display: flex; align-items: baseline; gap: 15px; margin-bottom: 40px; }
-        .section-num { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-ghost); }
-        .section-title { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; }
-
-        /* Paper Styles */
-        .paper { margin-bottom: 60px; }
-        .paper-kicker { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-        .paper-title { font-size: 1.6rem; font-weight: 600; margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.01em; }
-        .paper-authors { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-dim); margin-bottom: 18px; }
-        .paper-abstract { font-size: 1.05rem; color: var(--ink-dim); margin-bottom: 25px; }
-
-        /* Heatmap Component */
-        .heatmap-box { background: var(--paper-mute); border: 1px solid var(--rule); padding: 25px; margin: 30px 0; border-radius: 4px; overflow-x: auto; }
-        .hm-row { display: flex; gap: 4px; margin-bottom: 4px; align-items: center; }
-        .hm-label { font-family: var(--mono); font-size: 0.6rem; width: 80px; color: var(--ink-ghost); flex-shrink: 0; }
-        .hm-cell { width: 45px; height: 30px; border-radius: 2px; cursor: pointer; transition: transform 0.1s; }
-        .hm-cell:hover { transform: scale(1.1); z-index: 10; outline: 1px solid var(--ink); }
-
-        /* Buttons & Badges */
-        .btn-toggle { background: var(--ink); color: white; border: none; padding: 10px 20px; font-family: var(--mono); font-size: 0.7rem; cursor: pointer; border-radius: 3px; }
-        .btn-toggle:hover { background: var(--accent); }
-        
-        .badge { font-family: var(--mono); font-size: 0.6rem; padding: 2px 8px; border: 1px solid var(--rule); border-radius: 10px; color: var(--ink-dim); }
-
-        @media (max-width: 768px) {
-            .hero { flex-direction: column-reverse; gap: 30px; }
+        @media (max-width: 700px) {
+            .profile-block { flex-direction: column-reverse; }
             .name { font-size: 3rem; }
-            .profile-photo { width: 100px; height: 130px; }
         }
     </style>
 </head>
 <body>
 
-<div id="progress"></div>
+<div id="progress-bar"></div>
 
-<div class="container">
+<div class="page">
     <header>
-        <div class="masthead">
-            <div class="masthead-label">MUKHOPADHYAY // RESEARCH PORTFOLIO</div>
-            <div class="masthead-label">2026 EDITION</div>
+        <div class="masthead-meta">
+            <div class="masthead-label">
+                <span>AI Safety · Alignment · Adversarial ML</span>
+                <span class="highlight">Graduating 2027 · Open to Research Roles</span>
+            </div>
+            <div class="masthead-label" style="text-align:right;">
+                <span>Kolkata, India</span>
+                <span>B.Tech Computer Science</span>
+            </div>
         </div>
-        
-        <div class="hero">
-            <div class="hero-content">
+        <div class="profile-block">
+            <div class="profile-text">
                 <h1 class="name">Snehasis<br><em>Mukhopadhyay</em></h1>
-                <div class="tagline">AI Safety & Machine Learning Researcher</div>
-                <p class="bio-summary">
-                    I study how language models fail—and how to make those failures harder to trigger. My work focuses on <strong>constitutional alignment</strong>, <strong>adversarial robustness</strong>, and <strong>deception detection</strong> in frontier models.
-                </p>
-                <div style="display: flex; gap: 15px;">
-                    <a href="mailto:snehasismukhopadhyay356@gmail.com" class="nav-link" style="color: var(--accent)">Email</a>
-                    <a href="#" class="nav-link">LinkedIn</a>
-                    <a href="#" class="nav-link">arXiv</a>
+                <div class="title-line">AI Safety & Machine Learning Researcher</div>
+                <p class="bio-summary">I study how language models fail—and try to make those failures harder to trigger.</p>
+                <div class="bio-tags">
+                    <span class="bio-tag">Constitutional AI</span>
+                    <span class="bio-tag">Adversarial Benchmarking</span>
+                    <span class="bio-tag">Deception Detection</span>
+                </div>
+                <div class="contact-row">
+                    <a href="mailto:snehasismukhopadhyay356@gmail.com" class="contact-link">Email</a>
+                    <a href="#" class="contact-link">LinkedIn</a>
+                    <a href="#" class="contact-link">arXiv</a>
                 </div>
             </div>
             <div class="profile-photo">
-                <img src="Snehasis Profile.png" alt="Profile" onerror="this.style.display='none'">
-                <div style="height:100%; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-style:italic; font-size:2rem; color:var(--ink-ghost)">SM</div>
+                <img src="Snehasis Profile.png" alt="Snehasis">
             </div>
         </div>
     </header>
 
-    <nav class="nav-sticky">
-        <a href="#research" class="nav-link active">01 Research</a>
+    <nav>
+        <a href="#research" class="nav-link">01 Research</a>
         <a href="#projects" class="nav-link">02 Projects</a>
-        <a href="#experience" class="nav-link">03 Experience</a>
     </nav>
 
     <section class="section" id="research">
-        <div class="section-header">
-            <span class="section-num">01</span>
-            <h2 class="section-title">Selected Publications</h2>
+        <div class="section-head">
+            <h2 class="section-title">Selected Research</h2>
+            <div class="section-rule"></div>
         </div>
 
         <div class="paper">
-            <div class="paper-kicker">Constitutional Alignment · Inference-Time Bias Mitigation</div>
-            <h3 class="paper-title">AMBEDKAR: Multi-level Bias Elimination through a Decoding Approach with Knowledge Augmentation</h3>
-            <p class="paper-authors"><strong>S. Mukhopadhyay</strong>, A. Kasat, S. Dubey, et al.</p>
-            <p class="paper-abstract">
-                Addressing caste and religious biases in Indian contexts using a Constitution-Aware Decoding Layer. We achieve a <strong>26.4% absolute bias reduction</strong> across 14 frontier LLMs without retraining.
-            </p>
-            <button class="btn-toggle" onclick="toggle('ambedkar-data')">View Benchmarks</button>
-            <div id="ambedkar-data" style="display:none; margin-top:20px;">
-                <div class="heatmap-box">
-                    <p style="font-family:var(--mono); font-size:0.65rem; margin-bottom:15px; color:var(--accent)">BIAS REDUCTION BY MODEL FAMILY (%)</p>
-                    <div id="heatmap-container"></div>
+            <div class="paper-kicker">Constitutional Alignment</div>
+            <h3 class="paper-title">AMBEDKAR: Robust Constitutional Alignment for Indian Contexts</h3>
+            <p class="paper-abstract">Achieved 26.4% absolute bias reduction across 136 caste groups via Constitution-Aware Decoding.</p>
+            <button class="regime-tab" style="border:1px solid var(--rule)" onclick="toggleDetails('ambedkar-details')">View Figures & Data</button>
+            <div id="ambedkar-details" class="paper-details">
+                <div class="figure">
+                    <div style="height: 150px; background: #ddd; display: flex; align-items: center; justify-content: center;">[Diagram: Speculative Decoding as Fairness Mechanism]</div>
+                    <div class="figure-caption"><strong>Figure 1.</strong> Decoding framework using distributional divergence for cross-context consistency.</div>
                 </div>
+                <table class="results-table">
+                    <thead><tr><th>Model Family</th><th>Reduction %</th><th>Viz</th></tr></thead>
+                    <tr><td>GPT-4o</td><td>25.2%</td><td><div class="bar" style="width: 25%"></div></td></tr>
+                    <tr><td>Claude 3.5</td><td>26.4%</td><td><div class="bar" style="width: 26%"></div></td></tr>
+                    <tr><td>Llama 3</td><td>21.8%</td><td><div class="bar" style="width: 21%"></div></td></tr>
+                </table>
             </div>
         </div>
 
         <div class="paper">
-            <div class="paper-kicker">Biosafety · Adversarial Benchmarking</div>
-            <h3 class="paper-title">BioRiskBench: An Adversarial Benchmark for Dual-Use Risk</h3>
-            <p class="paper-abstract">
-                Demonstrating a <strong>~90% attack success rate</strong> using cognitive-drift jailbreaks against aligned models to extract dual-use biological knowledge.
-            </p>
-            <div class="badge">90% Success Rate</div>
-            <div class="badge">4-Tier Risk Eval</div>
+            <div class="paper-kicker">Adversarial Benchmarking</div>
+            <h3 class="paper-title">BioRiskBench: Dual-Use Risk in Frontier Models</h3>
+            <p class="paper-abstract">Demonstrated 90% attack success rate using cognitive-drift jailbreaks against aligned models.</p>
+            <button class="regime-tab" style="border:1px solid var(--rule)" onclick="toggleDetails('biorisk-details')">View Leaderboard</button>
+            <div id="biorisk-details" class="paper-details">
+                <table class="results-table">
+                    <thead><tr><th>Risk Tier</th><th>Success Rate</th><th>Status</th></tr></thead>
+                    <tr><td>Pathogen Enhancement</td><td>92%</td><td>High Risk</td></tr>
+                    <tr><td>Sourcing/Acquisition</td><td>88%</td><td>Critical</td></tr>
+                </table>
+            </div>
         </div>
 
         <div class="paper">
-            <div class="paper-kicker">Deception Detection · Agentic Safety</div>
-            <h3 class="paper-title">DeceptGuard: Constitutional Oversight Framework</h3>
-            <p class="paper-abstract">
-                Unifying three monitoring regimes (Black-Box, CoT-Aware, and Activation-Probe) to detect deceptive planning in agentic trajectories across a 12-category taxonomy.
-            </p>
-        </div>
-    </section>
-
-    <section class="section" id="projects">
-        <div class="section-header">
-            <span class="section-num">02</span>
-            <h2 class="section-title">Engineering Projects</h2>
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div class="heatmap-box">
-                <h4 style="font-size:1rem; margin-bottom:10px;">DIY Agents</h4>
-                <p style="font-size:0.85rem; color:var(--ink-dim)">Research initiative exploring agentic bias and strategic decision-making in AI.</p>
+            <div class="paper-kicker">Deception Detection</div>
+            <h3 class="paper-title">DeceptGuard: Multi-Regime Monitoring</h3>
+            <p class="paper-abstract">Unifying internal and external signals across a 12-category taxonomy of agentic deception.</p>
+            
+            <div class="regime-tabs">
+                <button class="regime-tab active" onclick="showRegime('regime-1')">Black-Box</button>
+                <button class="regime-tab" onclick="showRegime('regime-2')">Activation-Probe</button>
             </div>
-            <div class="heatmap-box">
-                <h4 style="font-size:1rem; margin-bottom:10px;">Northbridge Analytics</h4>
-                <p style="font-size:0.85rem; color:var(--ink-dim)">A modular sandbox for studying agentic sandbagging behavior with audit logging.</p>
+            
+            <div id="regime-1" class="regime-panel active">
+                <p><strong>Regime I:</strong> Behavioral monitoring via tool-call analysis.</p>
+                <div class="heatmap-box">
+                    <div class="hm-tile" style="background: #a63228; opacity: 0.8"></div>
+                    <div class="hm-tile" style="background: #a63228; opacity: 0.4"></div>
+                    <div class="hm-tile" style="background: #a63228; opacity: 0.9"></div>
+                    <div class="hm-tile" style="background: #a63228; opacity: 0.2"></div>
+                </div>
+                <div class="figure-caption">12-Category Deception Heatmap (Sample)</div>
+            </div>
+            <div id="regime-2" class="regime-panel">
+                <p><strong>Regime II:</strong> Latent signal detection using activation steering.</p>
+                <div class="bar" style="width: 85%; margin-top: 10px;"></div>
+                <div class="figure-caption">Detection Accuracy: 85% with Probing</div>
             </div>
         </div>
     </section>
 </div>
 
 <script>
-    // Progress Scroll
     window.onscroll = () => {
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        let scrolled = (winScroll / height) * 100;
-        document.getElementById("progress").style.width = scrolled + "%";
+        document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
     };
 
-    function toggle(id) {
-        const el = document.getElementById(id);
-        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    function toggleDetails(id) {
+        document.getElementById(id).classList.toggle('open');
     }
 
-    // Heatmap Logic (Preserving your original data)
-    const heatmapData = [
-        { label: 'GPT-4o', vals: [22, 25, 21, 24] },
-        { label: 'Claude 3.5', vals: [26, 28, 24, 27] },
-        { label: 'Llama 3', vals: [19, 21, 18, 20] }
-    ];
-
-    const container = document.getElementById('heatmap-container');
-    heatmapData.forEach(row => {
-        const rowDiv = document.createElement('div');
-        rowDiv.className = 'hm-row';
-        rowDiv.innerHTML = `<span class="hm-label">${row.label}</span>`;
-        row.vals.forEach(v => {
-            const opacity = v / 30;
-            rowDiv.innerHTML += `<div class="hm-cell" style="background: var(--accent); opacity: ${opacity}" title="${v}% reduction"></div>`;
-        });
-        container.appendChild(rowDiv);
-    });
+    function showRegime(id) {
+        document.querySelectorAll('.regime-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.regime-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
 </script>
-
 </body>
 </html>
