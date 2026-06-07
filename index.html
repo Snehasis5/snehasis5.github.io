@@ -18,9 +18,8 @@
       --border:   #e0d4c8;
       --text:     #1a1714;
       --muted:    #7a6e65;
-      --link:     #2a5bd7;
-      --maroon:   #800020;
-      --olive:    #4a5020;
+      --link:     #b03030;
+      --link-hover: #8a2020;
       --quote-bg: #f2ebe1;
       --max-w:    860px;
     }
@@ -35,9 +34,9 @@
       -webkit-font-smoothing: antialiased;
     }
     a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
 
-    /* Nav */
+    /* ─── NAV ─── */
     nav {
       position: sticky; top: 0;
       background: rgba(250,245,240,0.94);
@@ -60,21 +59,38 @@
     .nav-links a { color: var(--muted); }
     .nav-links a:hover { color: var(--text); text-decoration: none; }
 
-    /* Page wrapper */
+    /* ─── PAGE WRAPPER ─── */
     .page {
       max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 clamp(1.5rem, 6vw, 3rem);
     }
 
-    /* Hero */
+    /* ─── HERO: photo LEFT, text RIGHT (like Mayank Sharma) ─── */
     .hero {
       display: grid;
-      grid-template-columns: 1fr 200px;
-      gap: 3.5rem;
-      padding: 4rem 0 3rem;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      padding: 4.5rem 0 3.5rem;
       align-items: start;
     }
+    .hero-photo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    /* Squircle shape — rounded rectangle, not circle */
+    .photo {
+      width: 190px;
+      height: 220px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 38px;
+      border: 2px solid var(--border);
+      display: block;
+    }
+    .hero-text {}
     .hero-name {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 2.4rem; font-weight: 700;
@@ -93,6 +109,7 @@
     }
     .hero-bio p + p { margin-top: 0.9rem; }
     .hero-bio a { color: var(--link); font-weight: 400; }
+    .hero-bio a:hover { color: var(--link-hover); }
     .hero-links {
       margin-top: 1.5rem;
       display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem;
@@ -104,35 +121,14 @@
     }
     .hero-links a:hover { color: var(--text); text-decoration: none; }
 
-    /* Right column */
-    .hero-right {
-      display: flex; flex-direction: column; gap: 1rem;
-      align-items: center;
-    }
-    .photo {
-      width: 180px; height: 180px;
-      border-radius: 50%; object-fit: cover;
-      border: 3px solid var(--border); display: block;
-    }
-    .cartoon {
-      width: 180px; border-radius: 12px;
-      object-fit: cover; border: 2px solid var(--border); display: block;
-    }
-    .cartoon-caption {
-      font-size: 0.76rem; color: var(--muted);
-      text-align: center; font-style: italic;
-      line-height: 1.4; margin-top: 0.3rem;
-    }
-
-    /* Wave divider */
+    /* ─── WAVE DIVIDER ─── */
     .wave-divider { width: 100%; overflow: hidden; line-height: 0; }
     .wave-divider svg { display: block; width: 100%; }
 
-    /* Quote */
+    /* ─── QUOTE ─── */
     .quote-section {
       background: var(--quote-bg);
       padding: 3.5rem clamp(1.5rem, 6vw, 3rem);
-      margin: 0 0;
     }
     .quote-inner { max-width: var(--max-w); margin: 0 auto; }
     .quote-text {
@@ -145,7 +141,7 @@
       font-size: 1.05rem; color: var(--muted); margin-top: 1.1rem;
     }
 
-    /* Section heading */
+    /* ─── SECTION HEADING ─── */
     .section-wrap { padding: 3.5rem 0 4rem; }
     .section-title {
       font-family: 'Playfair Display', Georgia, serif;
@@ -154,7 +150,52 @@
     }
     .section-rule { width: 100%; height: 1px; background: var(--border); margin-bottom: 0; }
 
-    /* Publication list */
+    /* ─── RESEARCH PHILOSOPHY ─── */
+    .philosophy-outer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .philosophy-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 3.5rem clamp(1.5rem, 6vw, 3rem);
+    }
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 250px;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 1.8rem;
+    }
+    .philosophy-text {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1rem; line-height: 1.85;
+      color: #2a2420; font-weight: 300;
+    }
+    .philosophy-text p + p { margin-top: 1rem; }
+    .philosophy-text a { color: var(--link); }
+    .philosophy-text em { font-style: italic; }
+    .philosophy-cartoon-wrap {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.6rem;
+    }
+    .cartoon {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      object-fit: cover;
+      display: block;
+    }
+    .cartoon-caption {
+      font-size: 0.78rem; color: var(--muted);
+      text-align: center; font-style: italic;
+      line-height: 1.5;
+      max-width: 230px;
+    }
+
+    /* ─── PUBLICATION LIST ─── */
     .pub-list { list-style: none; }
     .pub-item {
       display: grid;
@@ -165,7 +206,6 @@
       align-items: start;
     }
     .pub-item:last-child { border-bottom: none; }
-
     .pub-thumb {
       width: 160px; aspect-ratio: 4/3;
       object-fit: cover; border-radius: 6px;
@@ -180,20 +220,17 @@
       font-size: 2.2rem; color: var(--muted);
       flex-shrink: 0;
     }
-
     .pub-title {
       font-size: 1.05rem; font-weight: 500;
       line-height: 1.45; margin-bottom: 0.35rem;
     }
     .pub-title a { color: var(--link); }
-    .pub-title a:hover { text-decoration: underline; }
-
+    .pub-title a:hover { color: var(--link-hover); text-decoration: underline; }
     .pub-authors {
       font-size: 0.9rem; color: var(--muted);
       line-height: 1.55; margin-bottom: 0.2rem;
     }
     .pub-authors strong { color: var(--text); font-weight: 500; }
-
     .pub-venue {
       font-style: italic; font-size: 0.9rem;
       color: var(--text); font-weight: 500; margin-bottom: 0.5rem;
@@ -202,15 +239,13 @@
       font-style: normal; font-weight: 400;
       color: var(--muted); font-size: 0.85rem;
     }
-
     .pub-links {
       display: flex; flex-wrap: wrap; gap: 0.1rem 0;
       font-size: 0.88rem; margin-bottom: 0.7rem;
     }
     .pub-links a { color: var(--link); }
-    .pub-links a:hover { text-decoration: underline; }
+    .pub-links a:hover { color: var(--link-hover); text-decoration: underline; }
     .pub-links .sep { color: var(--muted); padding: 0 0.4rem; }
-
     .pub-desc {
       font-size: 0.9rem; line-height: 1.65;
       color: #4a4038;
@@ -218,7 +253,7 @@
       font-weight: 300;
     }
 
-    /* Footer */
+    /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
       padding: 1.8rem 0; text-align: center;
@@ -227,26 +262,31 @@
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
 
-    /* Animations */
+    /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .hero         { animation: fadeUp 0.5s ease both; }
-    .quote-wrap   { animation: fadeUp 0.5s 0.1s ease both; }
-    .section-wrap { animation: fadeUp 0.5s 0.18s ease both; }
+    .hero             { animation: fadeUp 0.5s ease both; }
+    .quote-wrap       { animation: fadeUp 0.5s 0.1s ease both; }
+    .philosophy-inner { animation: fadeUp 0.5s 0.14s ease both; }
+    .section-wrap     { animation: fadeUp 0.5s 0.18s ease both; }
 
-    /* Mobile */
-    @media (max-width: 600px) {
+    /* ─── MOBILE ─── */
+    @media (max-width: 640px) {
       .hero {
         grid-template-columns: 1fr;
         gap: 2rem; padding: 2.5rem 0 2rem;
       }
-      .hero-right {
+      .hero-photo-wrap {
         flex-direction: row; align-items: flex-start; gap: 1.2rem;
       }
-      .photo, .cartoon { width: 110px; }
-      .photo { height: 110px; }
+      .photo { width: 100px; height: 120px; border-radius: 20px; }
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .cartoon { max-width: 100%; }
       .pub-item { grid-template-columns: 1fr; }
       .pub-thumb, .pub-thumb-placeholder {
         width: 100%; aspect-ratio: 16/7; margin-bottom: 0.5rem;
@@ -260,18 +300,31 @@
   <a class="nav-name" href="#">Snehasis Mukhopadhyay</a>
   <ul class="nav-links">
     <li><a href="#research">Research</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="https://snehasis5.github.io" target="_blank">Portfolio</a></li>
     <li><a href="https://github.com/snehasis5" target="_blank">GitHub</a></li>
   </ul>
 </nav>
 
 <div class="page">
+  <!-- ─── HERO ─── -->
   <section class="hero">
-    <div>
+
+    <!-- LEFT: squircle photo -->
+    <div class="hero-photo-wrap">
+      <img class="photo"
+        src="Snehasis Profile.png"
+        alt="Snehasis Mukhopadhyay"
+        onerror="this.style.background='var(--bg2)'; this.style.minHeight='220px';"
+      />
+    </div>
+
+    <!-- RIGHT: name, bio, links -->
+    <div class="hero-text">
       <h1 class="hero-name">Snehasis Mukhopadhyay</h1>
       <p class="hero-sub">AI Safety &amp; Alignment Research</p>
       <div class="hero-bio">
-        <p>I'm an undergraduate researcher at <a href="https://iiitkalyani.ac.in" target="_blank">IIIT Kalyani</a> (Electronics &amp; Communication Engineering) and <a href="https://study.iitm.ac.in" target="_blank">IIT Madras</a> (Data Science &amp; Applications), working on problems in AI safety and alignment.</p>
+        <p>I'm a final-year researcher at <a href="https://iiitkalyani.ac.in" target="_blank">IIIT Kalyani</a> (Electronics &amp; Communication Engineering) and <a href="https://study.iitm.ac.in" target="_blank">IIT Madras</a> (Data Science &amp; Applications), working on problems in AI safety and alignment.</p>
         <p>My work spans deception detection in LLM agents, bias mitigation through decoding-time interventions, and jailbreak attacks on multimodal models. I'm a research associate at <a href="https://aiisc.ai" target="_blank">AIISC</a> under <a href="https://scholar.google.com/citations?user=MwXQhGUAAAAJ" target="_blank">Dr. Amitava Das</a>, where we built the <a href="https://www.aiconstitutionofindia.in/" target="_blank">AI Constitution of India</a> benchmark. I completed the <a href="https://bluedot.org" target="_blank">BlueDot Impact</a> AI Safety Fellowship (April 2026 cohort) and am an upcoming mentor for the <a href="https://baseai.org" target="_blank">Black in AI Safety &amp; Ethics (BASE) Fellowship</a>.</p>
         <p>I've also spent time at the <a href="https://www.ias.ac.in/" target="_blank">Indian Academy of Sciences</a> as a Summer Research Fellow under Dr. Sudershan Iyengar. I care deeply about making AI systems that remain safe, honest, and controllable as they grow more capable.</p>
       </div>
@@ -284,48 +337,22 @@
       </div>
     </div>
 
-    <div class="hero-right">
-      <div>
-        <img class="photo"
-          src="Snehasis Profile.png"
-          alt="Snehasis Mukhopadhyay"
-          onerror="this.style.background='var(--bg2)'"
-        />
-      </div>
-      <div>
-        <!--
-          CARTOON IMAGE
-          Replace src below with your actual image path.
-          For GitHub Pages: place at /assets/vision.png
-          and use  src="/assets/vision.png"
-          or use a full URL if hosted elsewhere.
-        -->
-        <img class="cartoon"
-          src="Cartoon.png"
-          alt="Inspired about Robert Frost's 'The Road Not Taken' "
-          onerror="this.style.display='none';this.nextElementSibling.style.display='none'"
-        />
-        <p class="cartoon-caption">my research in a cartoon</p>
-      </div>
-    </div>
   </section>
 </div>
 
-<!-- Wave into quote -->
+<!-- ─── WAVE into QUOTE ─── -->
 <div class="wave-wrap quote-wrap">
   <div class="wave-divider">
     <svg viewBox="0 0 1440 52" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,26 C480,52 960,0 1440,26 L1440,52 L0,52 Z" fill="#f2ebe1"/>
     </svg>
   </div>
-
   <div class="quote-section">
     <div class="quote-inner">
       <p class="quote-text">You are not a drop in the ocean.<br>You are the entire ocean in a drop.</p>
       <p class="quote-attr">&#8212; Rumi</p>
     </div>
   </div>
-
   <div class="wave-divider" style="transform:scaleY(-1);margin-top:-1px;">
     <svg viewBox="0 0 1440 52" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,26 C480,52 960,0 1440,26 L1440,52 L0,52 Z" fill="#f2ebe1"/>
@@ -333,7 +360,40 @@
   </div>
 </div>
 
-<!-- Publications -->
+<!-- ─── RESEARCH PHILOSOPHY ─── -->
+<div class="philosophy-outer" id="philosophy">
+  <div class="philosophy-inner">
+    <h2 class="section-title">Research Philosophy</h2>
+    <div class="section-rule"></div>
+    <div class="philosophy-grid">
+
+      <div class="philosophy-text">
+        <p>Robert Frost ends "The Road Not Taken" not with triumph, but with a quiet confession: the speaker doesn't actually know which road was less travelled — he only knows he will <em>say</em> it made all the difference. That gap between what we claim and what we can verify is precisely where my research lives.</p>
+        <p>Most AI safety failures don't announce themselves. A model can appear aligned under standard evaluation while encoding deceptive strategies, concealing information in latent activations, or exploiting temporal gaps in safety training. The danger is not the failure we can measure — it's the one we haven't built instruments to see yet.</p>
+        <p>My work tries to build those instruments. I'm drawn to intervention points that others tend to pass over: the decoding locus as a fairness lever, chain-of-thought traces as a window into agent intent, past-tense framing as a jailbreak surface. The less-travelled path in AI safety is often the one that reveals what was always there.</p>
+        <p>I believe safety and capability need not be in tension — but that conviction only holds if we take instrumentation seriously at every layer of the model stack.</p>
+      </div>
+
+      <div class="philosophy-cartoon-wrap">
+        <!--
+          Replace src with your actual path, e.g. src="assets/Cartoon.png"
+          or keep src="Cartoon.png" if it lives in the same directory.
+        -->
+        <img class="cartoon"
+          src="Cartoon.png"
+          alt="Cartoon inspired by Robert Frost's The Road Not Taken"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='none';"
+        />
+        <p class="cartoon-caption">
+          Inspired by Frost's <em>The Road Not Taken</em> &mdash; choosing the less-travelled path in AI safety
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ─── PUBLICATIONS ─── -->
 <div class="page">
   <section class="section-wrap" id="research">
     <h2 class="section-title">Research</h2>
@@ -341,7 +401,14 @@
 
     <ul class="pub-list">
 
+      <!-- ── DeceptGuard ── -->
       <li class="pub-item">
+        <!--
+          ADD THUMBNAIL:
+          Replace the div.pub-thumb-placeholder below with:
+          <img class="pub-thumb" src="assets/deceptguard.png" alt="DeceptGuard" />
+          Image should be ~320×240px (4:3). Put files in an assets/ folder.
+        -->
         <div class="pub-thumb-placeholder">&#128269;</div>
         <div class="pub-body">
           <p class="pub-title">
@@ -360,8 +427,13 @@
         </div>
       </li>
 
+      <!-- ── AMBEDKAR ── -->
       <li class="pub-item">
-        <div class="SpecDec_Diagram1">&#9878;</div>
+        <!--
+          ADD THUMBNAIL:
+          <img class="pub-thumb" src="assets/ambedkar.png" alt="AMBEDKAR" />
+        -->
+        <div class="pub-thumb-placeholder">&#9878;</div>
         <div class="pub-body">
           <p class="pub-title">
             <a href="https://arxiv.org/abs/2509.02133" target="_blank">AMBEDKAR: A Multi-level Bias Elimination through a Decoding Approach with Knowledge Augmentation for Robust Constitutional Alignment of Language Models</a>
@@ -381,8 +453,13 @@
         </div>
       </li>
 
+      <!-- ── PAST2HARM ── -->
       <li class="pub-item">
-        <div class="image.png">&#128275;</div>
+        <!--
+          ADD THUMBNAIL:
+          <img class="pub-thumb" src="assets/past2harm.png" alt="PAST2HARM" />
+        -->
+        <div class="pub-thumb-placeholder">&#128275;</div>
         <div class="pub-body">
           <p class="pub-title">
             <a href="https://arxiv.org/abs/2605.27545" target="_blank">PAST2HARM: A Simple Adaptive Past Tense Attack for Jailbreaking Multimodal AI</a>
