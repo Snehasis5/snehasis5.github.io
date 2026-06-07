@@ -70,46 +70,33 @@
       padding: 0 clamp(1.5rem, 6vw, 3rem);
     }
 
-    /* ─── HERO: text LEFT, photo RIGHT ─── */
+    /* ─── HERO: photo LEFT, text RIGHT (Mayank Sharma style) ─── */
     .hero {
       display: grid;
-      grid-template-columns: 1fr 270px;
+      grid-template-columns: 300px 1fr;
       gap: 3.5rem;
-      padding: 4.5rem 0 3.5rem;
+      padding: 4rem 0 3.5rem;
       align-items: center;
     }
 
-    /* ── Stylish circular photo frame ── */
     .hero-photo-wrap {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       flex-shrink: 0;
     }
 
-    /* The decorative ring container */
-    .photo-frame {
-      position: relative;
-      width: 230px;
-      height: 230px;
-      border-radius: 50%;
-      /* layered box-shadow: outer warm ring, gap, red accent ring */
-      box-shadow:
-        0 0 0 4px var(--bg),
-        0 0 0 7px var(--frame-ring),
-        0 0 0 11px var(--bg),
-        0 0 0 13px var(--frame-outer),
-        0 8px 32px rgba(0,0,0,0.13);
-      flex-shrink: 0;
-    }
+    /* No extra wrapper needed — frame is on the img itself */
+    .photo-frame { display: contents; }
 
     .photo {
-      width: 230px;
-      height: 230px;
-      border-radius: 50%;
+      width: 280px;
+      height: 340px;
+      border-radius: 48px;        /* large squircle, matches reference */
       object-fit: cover;
       object-position: center top;
       display: block;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.10);
     }
 
     /* ── Hero text ── */
@@ -298,11 +285,9 @@
     @media (max-width: 640px) {
       .hero {
         grid-template-columns: 1fr;
-        gap: 2.5rem; padding: 2.5rem 0 2rem;
+        gap: 2rem; padding: 2.5rem 0 2rem;
       }
-      .hero-photo-wrap { order: -1; }
-      .photo-frame { width: 150px; height: 150px; }
-      .photo { width: 150px; height: 150px; }
+      .photo { width: 100%; height: 260px; border-radius: 32px; }
       .philosophy-grid { grid-template-columns: 1fr; gap: 2rem; }
       .cartoon { max-width: 100%; }
       .pub-item { grid-template-columns: 1fr; }
@@ -328,7 +313,18 @@
   <!-- ─── HERO ─── -->
   <section class="hero">
 
-    <!-- LEFT: name, bio, links -->
+    <!-- LEFT: squircle photo -->
+    <div class="hero-photo-wrap">
+      <div class="photo-frame">
+        <img class="photo"
+          src="Profile.png"
+          alt="Snehasis Mukhopadhyay"
+          onerror="this.style.background='var(--bg2)';"
+        />
+      </div>
+    </div>
+
+    <!-- RIGHT: name, bio, links -->
     <div class="hero-text">
       <h1 class="hero-name">Snehasis Mukhopadhyay</h1>
       <p class="hero-sub">AI Safety &amp; Alignment Research</p>
@@ -343,17 +339,6 @@
         <a href="https://github.com/snehasis5" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
         <a href="https://www.linkedin.com/in/snehasis-mukhopadhyay-344519252/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
         <a href="https://snehasis5.github.io" target="_blank"><i class="fa-solid fa-globe"></i> Portfolio</a>
-      </div>
-    </div>
-
-    <!-- RIGHT: circular framed photo -->
-    <div class="hero-photo-wrap">
-      <div class="photo-frame">
-        <img class="photo"
-          src="Profile.png"
-          alt="Snehasis Mukhopadhyay"
-          onerror="this.style.background='var(--bg2)';"
-        />
       </div>
     </div>
 
