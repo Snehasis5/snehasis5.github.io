@@ -13,15 +13,19 @@
 
   <style>
     :root {
-      --bg:       #faf5f0;
-      --bg2:      #f5ede4;
-      --border:   #e0d4c8;
-      --text:     #1a1714;
-      --muted:    #7a6e65;
-      --link:     #b03030;
+      --bg:         #faf5f0;
+      --bg2:        #f5ede4;
+      --border:     #e0d4c8;
+      --text:       #1a1714;
+      --muted:      #7a6e65;
+      --link:       #b03030;
       --link-hover: #8a2020;
-      --quote-bg: #f2ebe1;
-      --max-w:    860px;
+      --quote-bg:   #f2ebe1;
+      --max-w:      860px;
+      /* frame accent colours */
+      --frame-outer: #c8b8a8;
+      --frame-inner: #e8d8c8;
+      --frame-ring:  #b03030;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -66,32 +70,49 @@
       padding: 0 clamp(1.5rem, 6vw, 3rem);
     }
 
-    /* ─── HERO: photo LEFT, text RIGHT (like Mayank Sharma) ─── */
+    /* ─── HERO: text LEFT, photo RIGHT ─── */
     .hero {
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 3rem;
+      grid-template-columns: 1fr 270px;
+      gap: 3.5rem;
       padding: 4.5rem 0 3.5rem;
-      align-items: stretch;          /* both columns same height */
+      align-items: center;
     }
+
+    /* ── Stylish circular photo frame ── */
     .hero-photo-wrap {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
       flex-shrink: 0;
     }
-    /* Squircle shape — rounded rectangle, fills full column height */
+
+    /* The decorative ring container */
+    .photo-frame {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      /* layered box-shadow: outer warm ring, gap, red accent ring */
+      box-shadow:
+        0 0 0 4px var(--bg),
+        0 0 0 7px var(--frame-ring),
+        0 0 0 11px var(--bg),
+        0 0 0 13px var(--frame-outer),
+        0 8px 32px rgba(0,0,0,0.13);
+      flex-shrink: 0;
+    }
+
     .photo {
-      width: 100%;
-      height: 100%;
-      min-height: 320px;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
       object-fit: cover;
       object-position: center top;
-      border-radius: 38px;
-      border: 2px solid var(--border);
       display: block;
     }
-    .hero-text {}
+
+    /* ── Hero text ── */
     .hero-name {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 2.4rem; font-weight: 700;
@@ -277,16 +298,12 @@
     @media (max-width: 640px) {
       .hero {
         grid-template-columns: 1fr;
-        gap: 1.5rem; padding: 2.5rem 0 2rem;
+        gap: 2.5rem; padding: 2.5rem 0 2rem;
       }
-      .hero-photo-wrap {
-        flex-direction: row; align-items: flex-start;
-      }
-      .photo { width: 120px; min-height: 140px; border-radius: 22px; }
-      .philosophy-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+      .hero-photo-wrap { order: -1; }
+      .photo-frame { width: 150px; height: 150px; }
+      .photo { width: 150px; height: 150px; }
+      .philosophy-grid { grid-template-columns: 1fr; gap: 2rem; }
       .cartoon { max-width: 100%; }
       .pub-item { grid-template-columns: 1fr; }
       .pub-thumb, .pub-thumb-placeholder {
@@ -311,22 +328,13 @@
   <!-- ─── HERO ─── -->
   <section class="hero">
 
-    <!-- LEFT: squircle photo -->
-    <div class="hero-photo-wrap">
-      <img class="photo"
-        src="Profile.png"
-        alt="Snehasis Mukhopadhyay"
-        onerror="this.style.background='var(--bg2)'; this.style.minHeight='220px';"
-      />
-    </div>
-
-    <!-- RIGHT: name, bio, links -->
+    <!-- LEFT: name, bio, links -->
     <div class="hero-text">
       <h1 class="hero-name">Snehasis Mukhopadhyay</h1>
       <p class="hero-sub">AI Safety &amp; Alignment Research</p>
       <div class="hero-bio">
         <p>I love to experiment. I adore change — I abhor stagnation. I am an early career researcher passionate about AI safety and alignment. My prior work has been featured in venues like <a href="https://www.technologyreview.com" target="_blank">MIT Technology Review</a>. I was previously selected for the prestigious Summer Research Fellowship at the <a href="https://www.ias.ac.in/" target="_blank">Indian Academy of Sciences, Bangalore</a>.</p>
-        <p>Currently, I am interested in scaling constitutional oversight as a defense layer across the full harm stack ranging from weird behaviors, adversarial attacks, and misalignment. I will be a mentor for the upcoming <a href="https://baseai.org" target="_blank">BASE Fellowship</a> on technical AI safety; a list of concrete questions I am interested in can be found <a href="https://docs.google.com/document/d/1IAol4nk_vm9BbgbkEU2CCWcTR44HdnU_DIC1I3zaX9w/edit?usp=sharing" target="https://docs.google.com/document/d/1IAol4nk_vm9BbgbkEU2CCWcTR44HdnU_DIC1I3zaX9w/edit?usp=sharing">here</a>.</p>
+        <p>Currently, I am interested in scaling constitutional oversight as a defense layer across the full harm stack ranging from weird behaviors, adversarial attacks, and misalignment. I will be a mentor for the upcoming <a href="https://baseai.org" target="_blank">BASE Fellowship</a> on technical AI safety; a list of concrete questions I am interested in can be found <a href="https://docs.google.com/document/d/1IAol4nk_vm9BbgbkEU2CCWcTR44HdnU_DIC1I3zaX9w/edit?usp=sharing" target="_blank">here</a>.</p>
         <p>If you think we should be friends, reach out.</p>
       </div>
       <div class="hero-links">
@@ -335,6 +343,17 @@
         <a href="https://github.com/snehasis5" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
         <a href="https://www.linkedin.com/in/snehasis-mukhopadhyay-344519252/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
         <a href="https://snehasis5.github.io" target="_blank"><i class="fa-solid fa-globe"></i> Portfolio</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: circular framed photo -->
+    <div class="hero-photo-wrap">
+      <div class="photo-frame">
+        <img class="photo"
+          src="Profile.png"
+          alt="Snehasis Mukhopadhyay"
+          onerror="this.style.background='var(--bg2)';"
+        />
       </div>
     </div>
 
@@ -376,17 +395,13 @@
       </div>
 
       <div class="philosophy-cartoon-wrap">
-        <!--
-          Replace src with your actual path, e.g. src="assets/Cartoon.png"
-          or keep src="Cartoon.png" if it lives in the same directory.
-        -->
         <img class="cartoon"
           src="Cartoon.png"
           alt="Inspired by Robert Frost's The Road Not Taken"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='none';"
         />
         <p class="cartoon-caption">
-          Inspired by Robert Frost's <em>The Road Not Taken</em> 
+          Inspired by Robert Frost's <em>The Road Not Taken</em>
         </p>
       </div>
 
