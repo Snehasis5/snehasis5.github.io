@@ -22,7 +22,6 @@
       --link-hover: #8a2020;
       --quote-bg:   #f2ebe1;
       --max-w:      860px;
-      /* frame accent colours */
       --frame-outer: #c8b8a8;
       --frame-inner: #e8d8c8;
       --frame-ring:  #b03030;
@@ -70,36 +69,50 @@
       padding: 0 clamp(1.5rem, 6vw, 3rem);
     }
 
-    /* ─── HERO: photo LEFT, text RIGHT (Mayank Sharma style) ─── */
+    /* ─── HERO: bio LEFT, photo RIGHT ─── */
     .hero {
       display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 3.5rem;
+      grid-template-columns: 1fr 300px;
+      grid-template-rows: auto 1fr;
+      gap: 0 3.5rem;
       padding: 4rem 0 3.5rem;
-      align-items: center;
+      align-items: start;
     }
 
+    /* Full-width name row spanning both columns */
+    .hero-heading {
+      grid-column: 1 / -1;
+      margin-bottom: 1.8rem;
+    }
+
+    /* Bio: left column, row 2 */
+    .hero-text {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    /* Photo: right column, row 2 */
     .hero-photo-wrap {
+      grid-column: 2;
+      grid-row: 2;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       flex-shrink: 0;
     }
 
-    /* No extra wrapper needed — frame is on the img itself */
     .photo-frame { display: contents; }
 
     .photo {
       width: 280px;
       height: 340px;
-      border-radius: 48px;        /* large squircle, matches reference */
+      border-radius: 48px;
       object-fit: cover;
       object-position: center top;
       display: block;
       box-shadow: 0 6px 28px rgba(0,0,0,0.10);
     }
 
-    /* ── Hero text ── */
     .hero-name {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 2.4rem; font-weight: 700;
@@ -109,7 +122,7 @@
     .hero-sub {
       font-size: 0.875rem; color: var(--muted);
       font-weight: 400; letter-spacing: 0.04em;
-      text-transform: uppercase; margin-bottom: 1.6rem;
+      text-transform: uppercase;
     }
     .hero-bio {
       font-family: 'Source Serif 4', Georgia, serif;
@@ -285,7 +298,22 @@
     @media (max-width: 640px) {
       .hero {
         grid-template-columns: 1fr;
-        gap: 2rem; padding: 2.5rem 0 2rem;
+        grid-template-rows: auto auto auto;
+        gap: 1.5rem 0;
+        padding: 2.5rem 0 2rem;
+      }
+      .hero-heading {
+        grid-column: 1;
+        grid-row: 1;
+        margin-bottom: 0;
+      }
+      .hero-photo-wrap {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      .hero-text {
+        grid-column: 1;
+        grid-row: 3;
       }
       .photo { width: 100%; height: 260px; border-radius: 32px; }
       .philosophy-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -313,21 +341,14 @@
   <!-- ─── HERO ─── -->
   <section class="hero">
 
-    <!-- LEFT: squircle photo -->
-    <div class="hero-photo-wrap">
-      <div class="photo-frame">
-        <img class="photo"
-          src="Profile.png"
-          alt="Snehasis Mukhopadhyay"
-          onerror="this.style.background='var(--bg2)';"
-        />
-      </div>
-    </div>
-
-    <!-- RIGHT: name, bio, links -->
-    <div class="hero-text">
+    <!-- ROW 1: Full-width name + subtitle spanning both columns -->
+    <div class="hero-heading">
       <h1 class="hero-name">Snehasis Mukhopadhyay</h1>
       <p class="hero-sub">AI Safety &amp; Alignment Research</p>
+    </div>
+
+    <!-- ROW 2 LEFT: bio + links -->
+    <div class="hero-text">
       <div class="hero-bio">
         <p>I love to experiment. I adore change — I abhor stagnation. I am an early career researcher passionate about AI safety and alignment. My prior work has been featured in venues like <a href="https://www.technologyreview.com" target="_blank">MIT Technology Review</a>. I was previously selected for the prestigious Summer Research Fellowship at the <a href="https://www.ias.ac.in/" target="_blank">Indian Academy of Sciences, Bangalore</a>.</p>
         <p>Currently, I am interested in scaling constitutional oversight as a defense layer across the full harm stack ranging from weird behaviors, adversarial attacks, and misalignment. I will be a mentor for the upcoming <a href="https://baseai.org" target="_blank">BASE Fellowship</a> on technical AI safety; a list of concrete questions I am interested in can be found <a href="https://docs.google.com/document/d/1IAol4nk_vm9BbgbkEU2CCWcTR44HdnU_DIC1I3zaX9w/edit?usp=sharing" target="_blank">here</a>.</p>
@@ -339,6 +360,17 @@
         <a href="https://github.com/snehasis5" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
         <a href="https://www.linkedin.com/in/snehasis-mukhopadhyay-344519252/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
         <a href="https://snehasis5.github.io" target="_blank"><i class="fa-solid fa-globe"></i> Portfolio</a>
+      </div>
+    </div>
+
+    <!-- ROW 2 RIGHT: squircle photo -->
+    <div class="hero-photo-wrap">
+      <div class="photo-frame">
+        <img class="photo"
+          src="Profile.png"
+          alt="Snehasis Mukhopadhyay"
+          onerror="this.style.background='var(--bg2)';"
+        />
       </div>
     </div>
 
